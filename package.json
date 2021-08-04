@@ -34,5 +34,18 @@
     "mocha": "^8.4.0",
     "typescript": "^4.3.2",
     "vscode-test": "^1.5.2"
-  }
+  },
+  "contributes": {
+    "languages": [{
+        "id": "totalviewengine",
+        "aliases": ["Total view engine", "totalviewengine"],
+        "extensions": ["html"],
+        "configuration": "./src/language-configuration.json"
+    }],
+    "grammars": [{
+        "language": "totalviewengine",
+        "scopeName": "total.view",
+        "path": "./src/syntaxes/totalviewengine.tmLanguage.json"
+    }]
+}
 }

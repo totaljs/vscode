@@ -16,12 +16,12 @@ function add(language: string) {
 
 			snippets.forEach(snippet => {
 
-				if (snippet.type !== language && language !== "others")
+				if (snippet.type !== language && language !== 'others')
 					return;
  
 				const completion = new CompletionItem(snippet.text);
 				completion.insertText = new SnippetString(snippet.code);
-				completion.documentation = new MarkdownString(snippet.text);
+				completion.documentation = new MarkdownString(typeof snippet.markdown === 'string' ? snippet.markdown : snippet.text);
 
 				result.push(completion);
 			});

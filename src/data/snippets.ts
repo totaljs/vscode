@@ -1,12 +1,13 @@
 interface Snippet {
-	search: string,
+	search?: string,
 	text: string,
 	code: string,
-	ch: number,
+	ch?: number,
 	type?: string,
 	line?: number,
 	priority?: number,
-	special?: number
+	special?: number,
+	markdown?: String
 }
 
 const SNIPPETS: Snippet[] = [];
@@ -197,6 +198,29 @@ SNIPPETS.forEach(snippet => {
 	if (snippet.type == 'js')
 		snippet.type = 'javascript';
 
+});
+
+// Total.js template
+SNIPPETS.push({ type: 'html', text: 'foreach', code: '@{foreach ${1:m} in ${2:model}}\n\t${3}\n@{end}', markdown: 'Template looping in array or object\n\n@{foreach *m* in *model*}\n\t\n@{end}'});
+SNIPPETS.push({ type: 'html', text: 'section', code: '@{section ${1:header}}\n\t${3}\n@{end}', markdown: 'Template section\n\n@{section **name**}\n\t\n@{end}'});
+SNIPPETS.push({ type: 'html', text: 'meta', code: '@{meta(\'${1:Title}\')}', markdown: 'Template meta\n\n@{meta(**title**, **description?**, **keywords?**)}'});
+SNIPPETS.push({ type: 'html', text: 'view', code: '@{view(\'${1:Name}\')}', markdown: 'Template view\n\n@{view(**name**, **model?**)}'});
+SNIPPETS.push({ type: 'html', text: 'repository', code: '@{repository}', markdown: 'Template repository\n\n@{repository}'});
+SNIPPETS.push({ type: 'html', text: 'if', code: '@{if ${1}}\n\t${2}\n{fi}', markdown: 'Template IF statement\n\n@{if **statement**}\n\n@{fi}'});
+SNIPPETS.push({ type: 'html', text: 'if else', code: '@{if ${1}}\n\t${2}\n{else}\n\t{fi}', markdown: 'Template IF ELSE statement\n\n@{if **statement**}\n\n@{else}\n\t{fi}'});
+SNIPPETS.push({ type: 'html', text: 'body', code: '@{body}', markdown: 'Template body\n\n@{body}'});
+SNIPPETS.push({ type: 'html', text: 'compile', code: '@{compile ${1}}', markdown: 'Template compile\n\n@{compile **name**}'});
+SNIPPETS.push({ type: 'html', text: 'CONF', code: 'CONF', markdown: 'Template config\n\nCONF'});
+SNIPPETS.push({ type: 'html', text: 'import', code: '@{import(\'${1|default.js}\')}', markdown: 'Template import\n\n@{import(**filename**)}'});
+SNIPPETS.push({ type: 'html', text: 'VIEW', code: 'VIEW(\'${1|view}\')', markdown: 'Template view\n\nVIEW(**name**)'});
+
+// Add header to markdowns
+const header = '**⬢ Total.js ⬢**\n\n';
+SNIPPETS.forEach(snippet => {
+	if (snippet.markdown)
+		snippet.markdown = header + snippet.markdown;
+	else
+		snippet.markdown = header + snippet.text;
 });
 
 export default SNIPPETS;
